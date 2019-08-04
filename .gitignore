@@ -1,0 +1,9 @@
+# Archivos sublime
+*.sublime-workspace
+*.sublime-project
+
+# Archivos de codigo optimizado de python
+*.pyc
+
+# Archivos del tipo .fuse_hidden000029e500000001 que no se que son
+.fuse_hidden*
