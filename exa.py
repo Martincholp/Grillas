@@ -42,7 +42,7 @@ class Grilla(object):
 				if not (f, c) in self._celdas: 
 
 					# Creo la celda
-					new_celda = Celda((f, c))
+					new_celda = _Celda((f, c))
 
 					# La vinculo a la grilla padre
 					new_celda._Celda__grid = self  
@@ -102,7 +102,7 @@ class Grilla(object):
 						if not cur_pos_pared in self._paredes:
 
 							# Creo la pared
-							new_pared = Pared(cur_pos_pared)
+							new_pared = _Pared(cur_pos_pared)
 
 							# La vinculo a la grilla padre
 							new_pared._Pared__grid = self  
@@ -163,14 +163,13 @@ class Grilla(object):
 						if not cur_pos_vertice in self._vertices:
 
 							# Creo el vértice
-							new_vertice = Vertice(cur_pos_vertice)
+							new_vertice = _Vertice(cur_pos_vertice)
 
 							# Lo vinculo a la grilla padre
 							new_vertice._Vertice__grid = self  
 														  
 							# Agrego el vértice al diccionario
 							self._vertices[cur_pos_vertice] = new_vertice
-
 
 	@property
 	def count_filas(self):
@@ -198,10 +197,12 @@ class Grilla(object):
 		return len(self._vertices)
 
 	def __str__(self):
-		return "Grilla hexagonal de " + str(self.count_filas) + " filas y " + str(self.count_columnas) + " columnas"
+		msg = "Grilla hexagonal de " + str(self.count_filas) + " filas y " + str(self.count_columnas) + " columnas"
+		return msg
 
 	def __repr__(self):
-		return "Grilla hexagonal de " + str(self.count_filas) + " filas y " + str(self.count_columnas) + " columnas"
+		msg = "Grilla hexagonal de " + str(self.count_filas) + " filas y " + str(self.count_columnas) + " columnas"
+		return msg
 
 	def get_celda(self, pos):
 		'''Retorna la celda indicada en pos'''
@@ -217,14 +218,16 @@ class Grilla(object):
 		
 	def get_columna(self, numCol):
 		'''Retorna una lista con las celdas que pertenecen a la 
-		columna numCol'''
-		col = [celda for celda in self._celdas.values if celda.columna == numCol]
+		columna numCol, ordenadas por fila'''
+		col = [celda for celda in self._celdas.values() if celda.columna == numCol]
+		col.sort(key= lambda c:c.fila)
 		return col
 
 	def get_fila(self, numFil):
 		'''Retorna una lista con las celdas que pertenecen a la fila
-		numFil'''
-		fil = [celda for celda in self._celdas.values if celda.fila == numFil]
+		numFil, ordenadas por columna'''
+		fil = [celda for celda in self._celdas.values() if celda.fila == numFil]
+		fil.sort(key= lambda c:c.columna)
 		return fil	
 
 	def index_celdas(self):
@@ -242,7 +245,7 @@ class Grilla(object):
 		la grilla'''
 		return self._vertices.keys()
 
-class Celda(object):
+class _Celda(object):
 	"""Celda hexagonal"""
 	def __init__(self, pos):
 		'''Define una celda hexagonal. El parámetro pos es una
@@ -256,7 +259,6 @@ class Celda(object):
 		'''Devuelve la grilla a la que pertenece la celda'''
 		return self.__grid
 		
-
 	@property
 	def posicion(self):
 		'''Devuelve las coordenadas de la celda. Solo lectura'''
@@ -273,10 +275,12 @@ class Celda(object):
 		return self._pos[1]
 
 	def __str__(self):
-		return "Celda " + str(self.posicion)
+		msg = "Celda " + str(self.posicion)
+		return msg
 
 	def __repr__(self):
-		return "Celda " + str(self.posicion)
+		msg = "Celda " + str(self.posicion)
+		return msg
 	
 	def paredes(self):
 		'''Devuelve un diccionario con las paredes de la celda. La 
@@ -349,8 +353,6 @@ class Celda(object):
 			res_paredes[posRel[k]] = self.__grid.get_pared(pos_paredes[k])
 
 		return res_paredes
-
-
 
 	def get_pared(self, posRel):
 		'''Devuelve la pared indicada en posRel. posRel es la posición 
@@ -524,7 +526,6 @@ class Celda(object):
 
 		return res_vertices
 
-
 	def get_vertice(self, posRel):
 		'''Devuelve el vértice indicado en posRel. posRel es la 
 		posición de la vecina relativa a la celda, y es un string que 
@@ -538,9 +539,8 @@ class Celda(object):
 		"NO" --> vertice noroeste'''
 
 		return self.vertices()[posRel]
-
 	
-class Pared(object):
+class _Pared(object):
 	"""Pared de la celda. El parámetro pos es una tupla	que indica la
 	posición de la pared. Para identificar una posición	se debe pasar
 	la posición de la celda que está debajo de la pared	en el primer
@@ -581,14 +581,13 @@ class Pared(object):
 		lectura'''
 		return self._pos
 
-
 	def __str__(self):
-		return "Pared " + str(self.id)
-
+		msg = "Pared " + str(self.id)
+		return msg
 
 	def __repr__(self):
-		return "Pared " + str(self.id)
-
+		msg = "Pared " + str(self.id)
+		return msg
 
 	def vertices(self):
 		'''Devuelve un diccionario con los vértices de la pared. 
@@ -621,16 +620,14 @@ class Pared(object):
 		elif p == "NE":
 			if not c%2:
 				pos_A = ((f-1, c+1), "O")
-				pos_B = ((f  , c  ), "O")
+				pos_B = ((f  , c  ), "E")
 			else:
 				pos_A = ((f  , c+1), "O")
-				pos_B = ((f  , c  ), "O")
+				pos_B = ((f  , c  ), "E")
 
 		res_vertices = {"A":self.__grid.get_vertice(pos_A), "B":self.__grid.get_vertice(pos_B) }
 
 		return res_vertices
-
-
 
 	def get_vertice(self, posRel):
 		'''Devuelve el vértice indicado en posRel. posRel es la 
@@ -688,18 +685,17 @@ class Pared(object):
 		indice_celdas = self.__grid.index_celdas()
 		res_celdas = {}
 		if pos_A in indice_celdas:  # Verifico que la celda exista
-			res_celdas[pos_A] = self.__grid.get_celda(pos_A)
+			res_celdas['A'] = self.__grid.get_celda(pos_A)
 		else:  # Si no existe entonces es un borde
-			res_celdas[pos_A] = None
+			res_celdas['A'] = None
 
 		if pos_B in indice_celdas:  # Verifico que la celda exista
-			res_celdas[pos_B] = self.__grid.get_celda(pos_B)
+			res_celdas['B'] = self.__grid.get_celda(pos_B)
 		else:  # Si no existe entonces es un borde
-			res_celdas[pos_B] = None
+			res_celdas['B'] = None
 
 		return res_celdas
 
-	
 	def get_celda(self, posRel):
 		'''Devuelve la celda adyacente indicada en posRel. posRel es 
 		la posición de la celda relativo a la pared, y es un string 
@@ -789,7 +785,6 @@ class Pared(object):
 
 		return res_continuaciones
 
-
 	def get_continuacion(self, posRel):
 		'''Devuelve la pared continuación indicada en posRel. posRel
 		es la posición relativa de la pared continuación, y es un 
@@ -808,7 +803,7 @@ class Pared(object):
 
 		return self.continuaciones()[posRel]
 
-class Vertice(object):
+class _Vertice(object):
 	"""Vértice de una celda. El parámetro pos es una tupla que define
 	la posición del vértice. Para identificar la posición se debe 
 	pasar la posición de la celda y la posición relativa del vértice.
@@ -829,21 +824,20 @@ class Vertice(object):
 		'''Devuelve la grilla a la que pertenece el vértice'''
 		return self.__grid
 		
-
 	@property
 	def id(self):
 		'''Devuelve la posicion que identifica al vértice. Solo 
 		lectura'''
 		return self._pos
 
-
 	def __str__(self):
-		return "Vertice " + str(self.id)
+		msg = "Vertice " + str(self.id)
+		return msg
 	
 	def __repr__(self):
-		return "Vertice " + str(self.id)
+		msg = "Vertice " + str(self.id)
+		return msg
 	
-
 	def paredes(self):
 		'''Devuelve un diccionario con las paredes que convergen en el
 		vértice. La clave del diccionario es la posición relativa, y 
@@ -877,19 +871,19 @@ class Vertice(object):
 		indice_paredes = self.__grid.index_paredes()
 		res_paredes = {}
 		if pos_A in indice_paredes:  # Verifico que la pared exista
-			res_paredes[pos_A] = self.__grid.get_pared(pos_A)
+			res_paredes['A'] = self.__grid.get_pared(pos_A)
 		else:  # Si no existe entonces es un borde
-			res_paredes[pos_A] = None
+			res_paredes['A'] = None
 
 		if pos_B in indice_paredes:  # Verifico que la pared exista
-			res_paredes[pos_B] = self.__grid.get_pared(pos_B)
+			res_paredes['B'] = self.__grid.get_pared(pos_B)
 		else:  # Si no existe entonces es un borde
-			res_paredes[pos_B] = None
+			res_paredes['B'] = None
 
 		if pos_C in indice_paredes:  # Verifico que la pared exista
-			res_paredes[pos_C] = self.__grid.get_pared(pos_C)
+			res_paredes['C'] = self.__grid.get_pared(pos_C)
 		else:  # Si no existe entonces es un borde
-			res_paredes[pos_C] = None
+			res_paredes['C'] = None
 
 		return res_paredes
 
@@ -912,7 +906,6 @@ class Vertice(object):
 		fantasma'''
 
 		return self.paredes()[posRel]
-
 
 	def celdas(self):
 		'''Devuelve un diccionario con las celdas adyacentes. La clave
@@ -948,19 +941,19 @@ class Vertice(object):
 		res_celdas = {}
 
 		if pos_A in indice_celdas:  # Verifico que la celda exista
-			res_celdas[pos_A] = self.__grid.get_celda(pos_A)
+			res_celdas['A'] = self.__grid.get_celda(pos_A)
 		else:  # Si no existe entonces es un borde
-			res_celdas[pos_A] = None
+			res_celdas['A'] = None
 
 		if pos_B in indice_celdas:  # Verifico que la celda exista
-			res_celdas[pos_B] = self.__grid.get_celda(pos_B)
+			res_celdas['B'] = self.__grid.get_celda(pos_B)
 		else:  # Si no existe entonces es un borde
-			res_celdas[pos_B] = None
+			res_celdas['B'] = None
 
 		if pos_C in indice_celdas:  # Verifico que la celda exista
-			res_celdas[pos_C] = self.__grid.get_celda(pos_C)
+			res_celdas['C'] = self.__grid.get_celda(pos_C)
 		else:  # Si no existe entonces es un borde
-			res_celdas[pos_C] = None
+			res_celdas['C'] = None
 
 		return res_celdas
 	
