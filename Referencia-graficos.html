@@ -4,68 +4,119 @@
     <meta charset="UTF-8">
     <meta name="description" content="Ejemplo de HTML5">
     <meta name="keywords" content="HTML5, CSS3, JavaScript">
-    <title>Este texto es el título del documento</title>
+    <title>Graficar grillas</title>
     <link rel="stylesheet" href="grilla-docs-style.css">
 </head>
 <body>
     <div id="agrupar">
         <header id="cabecera">
-            <h1>Este es el título principal del sitio web</h1>
+            <h1>Graficar grillas</h1>
         </header>
         <nav id="menu">
             <ul>
-                <li><a href="Info.html">Info</a></li>
+                <li><a href="index.html">Inicio</a></li>
                 <li><a href="Referencia-grilla.html">Grillas</a></li>
                 <li><a href="Referencia-graficos.html">Gráficos</a></li>
                 
             </ul>
+
+            <ul>
+                <li><a href="#hexagonal">Grillas hexagonales</a></li>
+                <li><a href="#cuadrada">Grillas cuadradas</a></li>
+                <li><a href="#triangular">Grillas triangulares</a></li>
+                
+            </ul>
         </nav>
         <section id="seccion">
-            <article>
+            <article id="hexagonal">
                 <header>
                     <hgroup>
-                <h1>Título del mensaje 1</h1>
-                <h2>Subtítulo del mensaje 1</h2>
-            </hgroup>
-            <time datetime="2019-8-24" pubdate> Publicado el 24 de Agosto de 2019</time>
-        </header>
-        Texto del primer mensaje
+                        <h1>Grilla hexagonal</h1>
+                        <h2>Caractrísticas y propiedades de las grillas hexagonales</h2>
+                    </hgroup>
+                    <a href="#menu" class="arriba">Volver al menu</a>
+
+                </header>
+                <p>Las grillas hexagonales son un tipo de teselación donde cada tesela es un hexágono regular, cubriendo con ellos todo el espacio bidimensional en un formato tipo panal de abejas.</p>
+                <p>Con este tipo de teselación podemos obtener grillas donde en la parte superior e inferior de cada celda hay un lado horizontal y a los costados nos quedan con vértices, o celdas que tienen vértices por encima y por debajo y a los costados quedan lados verticales. Al primer caso lo llamaremos celdas horizontales, mientras que al segundo celdas verticales.  </p>
+                <p>Las figuras siguientes muestran estas variaciones</p>
+                <div class="figuras">
                     <figure>
                         <img src="grilla_exa.png">
                         <figcaption>
-                            Grilla hexagonal
+                            Grilla hexagonal horizontal
                         </figcaption>
                     </figure>
-                    <footer>
-                        <p>Comentarios del primer mensaje</p>
-                    </footer>
-            </article>
-            <article>
-                <header>
-                    <hgroup>
-                <h1>Título del mensaje 2</h1>
-                <h2>Subtítulo del mensaje 2</h2>
-            </hgroup>
-            <time datetime="2019-8-24" pubdate> Publicado el 24 de Agosto de 2019</time>
-        </header>
-        Texto del segundo mensaje
+                    <figure>
+                        <img src="grilla_exa_vertical.png">
+                        <figcaption>
+                            Grilla hexagonal vertical
+                        </figcaption>
+                    </figure>
+                </div>
+                <p>Hay que notar que debido a la forma de la celda, en el caso de celdas horizontales las columnas van quedando algunas mas elevadas que otras de forma alternadas, haciendo que la fila no recorra una línea recta, sino un zig-zag. Si las celdas fueran verticales son las filas las que se alternan algunas a la derecha y otras a la izquierda, y las columnas recorrerían un zig-zag.</p>
+                <div class="figuras">
                     <figure>
                         <img src="filas.png">
                         <figcaption>
                             Filas de la grilla hexagonal
                         </figcaption>
                     </figure>
-                    <footer>
-                        <p>Comentarios del segundo mensaje</p>
-                    </footer>
+                </div>
+                <footer>
+                    <a href="#menu" class="arriba">Volver al menu</a>
+                </footer> 
+            </article>
+            <article id="cuadrada">
+                <header>
+                    <hgroup>
+                        <h1>Grilla cuadrada</h1>
+                        <h2>Características de las grillas cuadradas</h2>
+                    </hgroup>
+                    <a href="#menu" class="arriba">Volver al menu</a>
+                </header>
+                    <p>Las grillas cuadradas se componen de celdas cuadradas o rectangulares para cubrir todo el espacio bidimensional. No hay diferentes tipos, ya que por la forma de la celda tanto las filas como las columnas quedan alineadas (no como enel caso hexagonal). </p>
+                <div class="figuras">
+                    <figure>
+                        <img src="grilla_cuad.png">
+                        <figcaption>
+                            Grilla cuadrada
+                        </figcaption>
+                    </figure>
+                </div>
+                <footer>
+                    <a href="#menu" class="arriba">Volver al menu</a>
+                </footer> 
+            </article>
+            <article id="triangular">
+                <header>
+                    <hgroup>
+                        <h1>Grilla triangular</h1>
+                        <h2>Características de las grillas triangulares</h2>
+                    </hgroup>
+                    <a href="#menu" class="arriba">Volver al menu</a>
+                </header>
+                    <p>Las grillas triangulares.... ( COMPLETAR ) </p>
+                <div class="figuras">
+                    <figure>
+                        <img src="grilla_cuad.png">
+                        <figcaption>
+                            Grilla triangular
+                        </figcaption>
+                    </figure>
+                </div>
+                <footer>
+                    <a href="#menu" class="arriba">Volver al menu</a>
+                </footer> 
             </article>
         </section>
-        <aside id="columna">
+        <!-- <aside id="columna">
             <blockquote>Mensaje número uno</blockquote>
             <blockquote>Mensaje número dos</blockquote>
-        </aside>
+        </aside> -->
         <footer id="pie">
-            Derechos Reservados &copy; 2010-2011
+            <p>By Martincholp </p>
+            <time datetime="2019-8" > Agosto de 2019 </time>
         </footer>
     </div>
 </body>
