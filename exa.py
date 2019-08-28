@@ -172,36 +172,36 @@ class Grilla(object):
 							self._vertices[cur_pos_vertice] = new_vertice
 
 	@property
-	def count_filas(self):
+	def cant_filas(self):
 		'''Cantidad de filas de la grilla. Solo lectura.'''
 		return self._filas
 
 	@property
-	def count_columnas(self):
+	def cant_columnas(self):
 		'''Cantidad de columnas de la grilla. Solo lectura.'''
 		return self._columnas
 
 	@property
-	def count_celdas(self):
+	def cant_celdas(self):
 		'''Cantidad de celdas de la grilla. Solo lectura.'''
 		return len(self._celdas)
 
 	@property
-	def count_paredes(self):
+	def cant_paredes(self):
 		'''Cantidad de paredes de la grilla. Solo lectura.'''
 		return len(self._paredes)
 
 	@property
-	def count_vertices(self):
+	def cant_vertices(self):
 		'''Cantidad de vértices de la grilla. Solo lectura.'''
 		return len(self._vertices)
 
 	def __str__(self):
-		msg = "Grilla hexagonal de " + str(self.count_filas) + " filas y " + str(self.count_columnas) + " columnas"
+		msg = "Grilla hexagonal de " + str(self.cant_filas) + " filas y " + str(self.cant_columnas) + " columnas"
 		return msg
 
 	def __repr__(self):
-		msg = "Grilla hexagonal de " + str(self.count_filas) + " filas y " + str(self.count_columnas) + " columnas"
+		msg = "Grilla hexagonal de " + str(self.cant_filas) + " filas y " + str(self.cant_columnas) + " columnas"
 		return msg
 
 	def get_celda(self, pos):

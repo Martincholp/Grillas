@@ -7,3 +7,6 @@
 
 # Archivos del tipo .fuse_hidden000029e500000001 que no se que son
 .fuse_hidden*
+
+# No quiero subir la carpeta info
+info
