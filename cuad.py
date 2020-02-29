@@ -149,6 +149,14 @@ class Grilla(object):
 		msg = "Grilla cuadrada de " + str(self.cant_filas) + " filas y " + str(self.cant_columnas) + " columnas"
 		return msg
 
+	def __getitem__(self, pos):
+		'''Retorna la celda indicada en fila,columna'''
+		return self._celdas[pos]
+
+	def __len__(self):
+		'''Cantidad de celdas de la grilla'''
+		return self.cant_celdas()
+
 	def get_celda(self, pos):
 		'''Retorna la celda indicada en pos'''
 		return self._celdas[pos]
